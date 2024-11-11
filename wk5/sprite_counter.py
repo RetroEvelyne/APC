@@ -1,6 +1,7 @@
 import turtle
 import random
 
+
 screen = turtle.Screen()
 screen.title("Random Sprites")
 screen.setup(600, 600)
@@ -13,6 +14,8 @@ counter.hideturtle()
 counter.color("white")
 counter.goto(-280, 250)
 
+shapes = ["arrow", "circle", "classic", "square", "triangle", "turtle"]
+
 color_counts = {
         "red": 0,
         "orange": 0,
@@ -24,24 +27,21 @@ sprites = []
 
 def update_counter():
     counter.clear()
+    counter.write(f"Total: {sum(color_counts.values())}", font=("Arial", 20, "normal"))
     y = 250
-    counter.write(f"Red: {color_counts['red']}", font=("Arial", 20, "normal"))
-    counter.goto(-280, y-20)
-    counter.write(f"Orange: {color_counts['orange']}", font=("Arial", 20, "normal"))
-    counter.goto(-280, y-40)
-    counter.write(f"Yellow: {color_counts['yellow']}", font=("Arial", 20, "normal"))
-    counter.goto(-280, y-60)
-    counter.write(f"Green: {color_counts['green']}", font=("Arial", 20, "normal"))
-    counter.goto(-280, y-80)
-    counter.write(f"Purple: {color_counts['purple']}", font=("Arial", 20, "normal"))
-    counter.goto(-280, y)
+    for color, counts in color_counts.items():
+        counter.goto(-280, y)
+        counter.write(f"{color}: {counts}", font=("Arial", 20, "normal"))
+        y -= 20
+    counter.goto(-280, 280)
 
 def create_sprite():
     t = turtle.Turtle()
     t.penup()
     t.goto(random.randint(-250, 250), -280)
     t.left(90)
-    t.shape("turtle")
+    t.turtlesize(random.randint(2,5))
+    t.shape(random.choice(shapes))
     random_color = random.choice(list(color_counts.keys()))
     t.pencolor(random_color)
     color_counts[random_color] += 1

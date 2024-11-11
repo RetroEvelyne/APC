@@ -10,6 +10,6 @@ todo_list.append("call mum")
 
 print(todo_list)
 
-todo_list += [ "clean room", "cook dinner" ]
+todo_list.extend([ "clean room", "cook dinner" ])
 
 print(todo_list)
